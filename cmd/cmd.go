@@ -8,7 +8,7 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/github/hub/ui"
+	"github.com/hilalisadev/hub/ui"
 )
 
 type Cmd struct {

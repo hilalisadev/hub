@@ -9,9 +9,9 @@ import (
 	"strings"
 
 	"github.com/atotto/clipboard"
-	"github.com/github/hub/git"
-	"github.com/github/hub/ui"
-	"github.com/github/hub/utils"
+	"github.com/hilalisadev/hub/git"
+	"github.com/hilalisadev/hub/ui"
+	"github.com/hilalisadev/hub/utils"
 )
 
 type stringSliceValue []string

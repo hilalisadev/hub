@@ -20,8 +20,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/github/hub/ui"
-	"github.com/github/hub/utils"
+	"github.com/hilalisadev/hub/ui"
+	"github.com/hilalisadev/hub/utils"
 	"golang.org/x/net/http/httpproxy"
 )
 

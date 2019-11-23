@@ -8,9 +8,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/github/hub/git"
-	"github.com/github/hub/ui"
-	"github.com/github/hub/utils"
+	"github.com/hilalisadev/hub/git"
+	"github.com/hilalisadev/hub/ui"
+	"github.com/hilalisadev/hub/utils"
 	"github.com/kballard/go-shellquote"
 )
 

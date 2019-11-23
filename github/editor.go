@@ -10,8 +10,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/github/hub/cmd"
-	"github.com/github/hub/git"
+	"github.com/hilalisadev/hub/cmd"
+	"github.com/hilalisadev/hub/git"
 	"github.com/kballard/go-shellquote"
 )
 

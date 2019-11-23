@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/github/hub/cmd"
+	"github.com/hilalisadev/hub/cmd"
 )
 
 type TestRepo struct {

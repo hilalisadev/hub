@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/github/hub/cmd"
-	"github.com/github/hub/git"
-	"github.com/github/hub/ui"
+	"github.com/hilalisadev/hub/cmd"
+	"github.com/hilalisadev/hub/git"
+	"github.com/hilalisadev/hub/ui"
 	"github.com/kballard/go-shellquote"
 )
 

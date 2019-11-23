@@ -5,10 +5,10 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/github/hub/git"
-	"github.com/github/hub/github"
-	"github.com/github/hub/ui"
-	"github.com/github/hub/utils"
+	"github.com/hilalisadev/hub/git"
+	"github.com/hilalisadev/hub/github"
+	"github.com/hilalisadev/hub/ui"
+	"github.com/hilalisadev/hub/utils"
 )
 
 var cmdSync = &Command{

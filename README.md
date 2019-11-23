@@ -44,7 +44,7 @@ Ubuntu | [Snap](https://snapcraft.io) | `snap install hub --classic`
 #### Standalone
 
 `hub` can be easily installed as an executable. Download the latest
-[compiled binaries](https://github.com/github/hub/releases) and put it anywhere
+[compiled binaries](https://github.com/hilalisadev/hub/releases) and put it anywhere
 in your executable path.
 
 #### Source
@@ -118,13 +118,13 @@ These scripts complement existing completion scripts that ship with git.
 
 [Installation instructions](etc)
 
-* [hub bash completion](https://github.com/github/hub/blob/master/etc/hub.bash_completion.sh)
-* [hub zsh completion](https://github.com/github/hub/blob/master/etc/hub.zsh_completion)
-* [hub fish completion](https://github.com/github/hub/blob/master/etc/hub.fish_completion)
+* [hub bash completion](https://github.com/hilalisadev/hub/blob/master/etc/hub.bash_completion.sh)
+* [hub zsh completion](https://github.com/hilalisadev/hub/blob/master/etc/hub.zsh_completion)
+* [hub fish completion](https://github.com/hilalisadev/hub/blob/master/etc/hub.fish_completion)
 
 Meta
 ----
 
 * Home: <https://github.com/github/hub>
-* Bugs: <https://github.com/github/hub/issues>
-* Authors: <https://github.com/github/hub/contributors>
+* Bugs: <https://github.com/hilalisadev/hub/issues>
+* Authors: <https://github.com/hilalisadev/hub/contributors>

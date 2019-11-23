@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/bmizerany/assert"
-	"github.com/github/hub/fixtures"
+	"github.com/hilalisadev/hub/fixtures"
 )
 
 func TestProject_WebURL(t *testing.T) {

@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/github/hub/git"
+	"github.com/hilalisadev/hub/git"
 )
 
 var (

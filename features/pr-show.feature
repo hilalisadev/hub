@@ -81,12 +81,12 @@ Feature: hub pr show
         assert :state => "open",
                :head => "ashemesh:topic"
         json [
-          { :html_url => "https://github.com/github/hub/pull/102" },
+          { :html_url => "https://github.com/hilalisadev/hub/pull/102" },
         ]
       }
       """
     When I successfully run `hub pr show`
-    Then "open https://github.com/github/hub/pull/102" should be run
+    Then "open https://github.com/hilalisadev/hub/pull/102" should be run
 
   Scenario: Differently named branch in fork
     Given the "upstream" remote has url "git@github.com:github/hub.git"
@@ -96,12 +96,12 @@ Feature: hub pr show
       get('/repos/github/hub/pulls'){
         assert :head => "ashemesh:remote-topic"
         json [
-          { :html_url => "https://github.com/github/hub/pull/102" },
+          { :html_url => "https://github.com/hilalisadev/hub/pull/102" },
         ]
       }
       """
     When I successfully run `hub pr show`
-    Then "open https://github.com/github/hub/pull/102" should be run
+    Then "open https://github.com/hilalisadev/hub/pull/102" should be run
 
   Scenario: Upstream configuration with HTTPS URL
     Given I am on the "local-topic" branch
@@ -112,12 +112,12 @@ Feature: hub pr show
       get('/repos/ashemesh/hub/pulls'){
         assert :head => "octocat:remote-topic"
         json [
-          { :html_url => "https://github.com/github/hub/pull/102" },
+          { :html_url => "https://github.com/hilalisadev/hub/pull/102" },
         ]
       }
       """
     When I successfully run `hub pr show`
-    Then "open https://github.com/github/hub/pull/102" should be run
+    Then "open https://github.com/hilalisadev/hub/pull/102" should be run
 
   Scenario: Upstream configuration with SSH URL
     Given I am on the "local-topic" branch
@@ -128,12 +128,12 @@ Feature: hub pr show
       get('/repos/ashemesh/hub/pulls'){
         assert :head => "octocat:remote-topic"
         json [
-          { :html_url => "https://github.com/github/hub/pull/102" },
+          { :html_url => "https://github.com/hilalisadev/hub/pull/102" },
         ]
       }
       """
     When I successfully run `hub pr show`
-    Then "open https://github.com/github/hub/pull/102" should be run
+    Then "open https://github.com/hilalisadev/hub/pull/102" should be run
 
   Scenario: Explicit head branch
     Given the GitHub API server:

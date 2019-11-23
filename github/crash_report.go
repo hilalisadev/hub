@@ -10,10 +10,10 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/github/hub/git"
-	"github.com/github/hub/ui"
-	"github.com/github/hub/utils"
-	"github.com/github/hub/version"
+	"github.com/hilalisadev/hub/git"
+	"github.com/hilalisadev/hub/ui"
+	"github.com/hilalisadev/hub/utils"
+	"github.com/hilalisadev/hub/version"
 )
 
 const (

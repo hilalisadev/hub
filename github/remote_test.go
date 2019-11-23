@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/bmizerany/assert"
-	"github.com/github/hub/fixtures"
+	"github.com/hilalisadev/hub/fixtures"
 )
 
 func TestGithubRemote_NoPush(t *testing.T) {

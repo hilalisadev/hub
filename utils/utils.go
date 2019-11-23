@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/github/hub/ui"
+	"github.com/hilalisadev/hub/ui"
 	"github.com/kballard/go-shellquote"
 )
 

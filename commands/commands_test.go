@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/bmizerany/assert"
-	"github.com/github/hub/ui"
+	"github.com/hilalisadev/hub/ui"
 )
 
 func TestMain(m *testing.M) {

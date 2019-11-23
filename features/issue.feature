@@ -348,13 +348,13 @@ Feature: hub issue
                :labels => :no
 
         status 201
-        json :html_url => "https://github.com/github/hub/issues/1337"
+        json :html_url => "https://github.com/hilalisadev/hub/issues/1337"
       }
       """
     When I successfully run `hub issue create -m "Not workie, pls fix"`
     Then the output should contain exactly:
       """
-      https://github.com/github/hub/issues/1337\n
+      https://github.com/hilalisadev/hub/issues/1337\n
       """
 
   Scenario: Create an issue and open in browser
@@ -380,13 +380,13 @@ Feature: hub issue
                :labels => ["wont fix", "docs", "nope"]
 
         status 201
-        json :html_url => "https://github.com/github/hub/issues/1337"
+        json :html_url => "https://github.com/hilalisadev/hub/issues/1337"
       }
       """
     When I successfully run `hub issue create -m "hello" -l "wont fix,docs" -lnope`
     Then the output should contain exactly:
       """
-      https://github.com/github/hub/issues/1337\n
+      https://github.com/hilalisadev/hub/issues/1337\n
       """
 
   Scenario: Create an issue with milestone and assignees
@@ -400,13 +400,13 @@ Feature: hub issue
                :labels => :no
 
         status 201
-        json :html_url => "https://github.com/github/hub/issues/1337"
+        json :html_url => "https://github.com/hilalisadev/hub/issues/1337"
       }
       """
     When I successfully run `hub issue create -m "hello" -M 12 --assign mislav,josh -apcorpet`
     Then the output should contain exactly:
       """
-      https://github.com/github/hub/issues/1337\n
+      https://github.com/hilalisadev/hub/issues/1337\n
       """
 
   Scenario: Create an issue with milestone by name
@@ -423,13 +423,13 @@ Feature: hub issue
       post('/repos/github/hub/issues') {
         assert :milestone => 41319
         status 201
-        json :html_url => "https://github.com/github/hub/issues/1337"
+        json :html_url => "https://github.com/hilalisadev/hub/issues/1337"
       }
       """
     When I successfully run `hub issue create -m "hello" -M "hello world!"`
     Then the output should contain exactly:
       """
-      https://github.com/github/hub/issues/1337\n
+      https://github.com/hilalisadev/hub/issues/1337\n
       """
 
   Scenario: Editing empty issue message
@@ -447,13 +447,13 @@ Feature: hub issue
                :body => "my nice issue"
 
         status 201
-        json :html_url => "https://github.com/github/hub/issues/1337"
+        json :html_url => "https://github.com/hilalisadev/hub/issues/1337"
       }
       """
     When I successfully run `hub issue create -m '' --edit`
     Then the output should contain exactly:
       """
-      https://github.com/github/hub/issues/1337\n
+      https://github.com/hilalisadev/hub/issues/1337\n
       """
 
   Scenario: Issue template
@@ -473,13 +473,13 @@ Feature: hub issue
                :body => "my nice issue template"
 
         status 201
-        json :html_url => "https://github.com/github/hub/issues/1337"
+        json :html_url => "https://github.com/hilalisadev/hub/issues/1337"
       }
       """
     When I successfully run `hub issue create`
     Then the output should contain exactly:
       """
-      https://github.com/github/hub/issues/1337\n
+      https://github.com/hilalisadev/hub/issues/1337\n
       """
 
   Scenario: Issue template from a subdirectory
@@ -499,7 +499,7 @@ Feature: hub issue
                :body => "my nice issue template"
 
         status 201
-        json :html_url => "https://github.com/github/hub/issues/1337"
+        json :html_url => "https://github.com/hilalisadev/hub/issues/1337"
       }
       """
     Given a directory named "subdir"
@@ -507,7 +507,7 @@ Feature: hub issue
     And I successfully run `hub issue create`
     Then the output should contain exactly:
       """
-      https://github.com/github/hub/issues/1337\n
+      https://github.com/hilalisadev/hub/issues/1337\n
       """
 
   Scenario: Multiple issue templates
@@ -531,13 +531,13 @@ Feature: hub issue
                :body => ""
 
         status 201
-        json :html_url => "https://github.com/github/hub/issues/1337"
+        json :html_url => "https://github.com/hilalisadev/hub/issues/1337"
       }
       """
     When I successfully run `hub issue create`
     Then the output should contain exactly:
       """
-      https://github.com/github/hub/issues/1337\n
+      https://github.com/hilalisadev/hub/issues/1337\n
       """
 
   Scenario: Multiple issue templates with default
@@ -558,13 +558,13 @@ Feature: hub issue
                :body => "The default template"
 
         status 201
-        json :html_url => "https://github.com/github/hub/issues/1337"
+        json :html_url => "https://github.com/hilalisadev/hub/issues/1337"
       }
       """
     When I successfully run `hub issue create`
     Then the output should contain exactly:
       """
-      https://github.com/github/hub/issues/1337\n
+      https://github.com/hilalisadev/hub/issues/1337\n
       """
 
   Scenario: A file named ".github"
@@ -584,13 +584,13 @@ Feature: hub issue
                :body => ""
 
         status 201
-        json :html_url => "https://github.com/github/hub/issues/1337"
+        json :html_url => "https://github.com/hilalisadev/hub/issues/1337"
       }
       """
     When I successfully run `hub issue create`
     Then the output should contain exactly:
       """
-      https://github.com/github/hub/issues/1337\n
+      https://github.com/hilalisadev/hub/issues/1337\n
       """
 
   Scenario: Fetch issue labels

@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/github/hub/github"
+	"github.com/hilalisadev/hub/github"
 )
 
 type formatIssueTest struct {

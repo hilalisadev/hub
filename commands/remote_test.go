@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	"github.com/bmizerany/assert"
-	"github.com/github/hub/fixtures"
-	"github.com/github/hub/github"
+	"github.com/hilalisadev/hub/fixtures"
+	"github.com/hilalisadev/hub/github"
 )
 
 func TestTransformRemoteArgs(t *testing.T) {

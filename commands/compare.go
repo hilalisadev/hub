@@ -6,8 +6,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/github/hub/github"
-	"github.com/github/hub/utils"
+	"github.com/hilalisadev/hub/github"
+	"github.com/hilalisadev/hub/utils"
 )
 
 var cmdCompare = &Command{

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/github/hub/cmd"
-	"github.com/github/hub/utils"
+	"github.com/hilalisadev/hub/cmd"
+	"github.com/hilalisadev/hub/utils"
 )
 
 type Args struct {
