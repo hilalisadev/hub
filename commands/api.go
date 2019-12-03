@@ -274,10 +274,13 @@ func apiCommand(_ *Command, args *Args) {
 
 		if parseJSON && jsonType {
 			hasNextPage, endCursor = utils.JSONPath(out, response.Body, colorize)
+
 		} else if paginate && isGraphQL {
 			bodyCopy := &bytes.Buffer{}
 			io.Copy(out, io.TeeReader(response.Body, bodyCopy))
+			txtBody, _ := ioutil.ReadAll(bodyCopy)
 			hasNextPage, endCursor = utils.JSONPath(ioutil.Discard, bodyCopy, false)
+			Display(txtBody)
 		} else {
 			io.Copy(out, response.Body)
 		}
