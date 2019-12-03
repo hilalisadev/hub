@@ -280,6 +280,7 @@ func apiCommand(_ *Command, args *Args) {
 			io.Copy(out, io.TeeReader(response.Body, bodyCopy))
 			txtBody, _ := ioutil.ReadAll(bodyCopy)
 			hasNextPage, endCursor = utils.JSONPath(ioutil.Discard, bodyCopy, false)
+			fmt.Fprintf(out, "\n")
 			Display(txtBody)
 		} else {
 			io.Copy(out, response.Body)
