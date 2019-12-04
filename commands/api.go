@@ -281,7 +281,8 @@ func apiCommand(_ *Command, args *Args) {
 			txtBody, _ := ioutil.ReadAll(bodyCopy)
 			hasNextPage, endCursor = utils.JSONPath(ioutil.Discard, bodyCopy, false)
 			fmt.Fprintf(out, "\n")
-			Display(txtBody)
+
+			Display(txtBody, "--sav")
 		} else {
 			io.Copy(out, response.Body)
 		}
