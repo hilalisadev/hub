@@ -67,7 +67,8 @@ var cmdApi = &Command{
 	-t, --flat
 		Parse response JSON and output the data in a line-based key-value format
 		suitable for use in shell scripts.
-
+	--list
+		List all files in repository
 	--paginate
 		Automatically request and output the next page of results until all
 		resources have been listed. For GET requests, this follows the '<next>'
@@ -245,6 +246,7 @@ func apiCommand(_ *Command, args *Args) {
 	includeHeaders := args.Flag.Bool("--include")
 	paginate := args.Flag.Bool("--paginate")
 	rateLimitWait := args.Flag.Bool("--obey-ratelimit")
+	listRepository := args.Flag.Bool("--list")
 
 	args.NoForward()
 
@@ -262,7 +264,6 @@ func apiCommand(_ *Command, args *Args) {
 		if !success {
 			jsonType, _ = regexp.MatchString(`[/+]json(?:;|$)`, response.Header.Get("Content-Type"))
 		}
-
 		if includeHeaders {
 			fmt.Fprintf(out, "%s %s\r\n", response.Proto, response.Status)
 			response.Header.Write(out)
@@ -275,14 +276,16 @@ func apiCommand(_ *Command, args *Args) {
 		if parseJSON && jsonType {
 			hasNextPage, endCursor = utils.JSONPath(out, response.Body, colorize)
 
+		} else if listRepository && isGraphQL {
+			bodyCopy := &bytes.Buffer{}
+			tee := io.TeeReader(response.Body, bodyCopy)
+			txtBody, _ := ioutil.ReadAll(tee)
+			Display(txtBody, "--sav")
 		} else if paginate && isGraphQL {
 			bodyCopy := &bytes.Buffer{}
 			io.Copy(out, io.TeeReader(response.Body, bodyCopy))
-			txtBody, _ := ioutil.ReadAll(bodyCopy)
 			hasNextPage, endCursor = utils.JSONPath(ioutil.Discard, bodyCopy, false)
 			fmt.Fprintf(out, "\n")
-
-			Display(txtBody, "--sav")
 		} else {
 			io.Copy(out, response.Body)
 		}
