@@ -33,7 +33,7 @@ type Reading struct {
 	} `json:"data"`
 }
 
-func Display(data []byte, option ...string) error {
+func (c *Command) Display(data []byte, option ...string) error {
 
 	var reading Reading
 	err := json.Unmarshal(data, &reading)
