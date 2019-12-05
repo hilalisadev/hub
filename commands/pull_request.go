@@ -131,7 +131,7 @@ func init() {
 	CmdRunner.Use(cmdPullRequest)
 }
 
-func pullRequest(cmd *Command, args *Args) {
+func pullRequest(cmd *Command, args *Args) []byte {
 	localRepo, err := github.LocalRepo()
 	utils.Check(err)
 
@@ -438,6 +438,7 @@ of text is the title and the rest is the description.`, fullBase, fullHead))
 
 	args.NoForward()
 	printBrowseOrCopy(args, pullRequestURL, args.Flag.Bool("--browse"), args.Flag.Bool("--copy"))
+	return nil
 }
 
 func parsePullRequestProject(context *github.Project, s string) (p *github.Project, ref string) {

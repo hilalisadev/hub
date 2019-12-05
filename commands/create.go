@@ -60,7 +60,7 @@ func init() {
 	CmdRunner.Use(cmdCreate)
 }
 
-func create(command *Command, args *Args) {
+func create(command *Command, args *Args) []byte {
 	_, err := git.Dir()
 	if err != nil {
 		err = fmt.Errorf("'create' must be run from inside a git repository")
@@ -148,4 +148,5 @@ func create(command *Command, args *Args) {
 	flagCreateBrowse := args.Flag.Bool("--browse")
 	flagCreateCopy := args.Flag.Bool("--copy")
 	printBrowseOrCopy(args, webUrl, flagCreateBrowse, flagCreateCopy)
+	return nil
 }

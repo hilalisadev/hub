@@ -146,7 +146,7 @@ func init() {
 	CmdRunner.Use(cmdApi)
 }
 
-func apiCommand(_ *Command, args *Args) {
+func apiCommand(_ *Command, args *Args) []byte {
 	path := ""
 	if !args.IsParamsEmpty() {
 		path = args.GetParam(0)
@@ -265,9 +265,9 @@ func apiCommand(_ *Command, args *Args) {
 			jsonType, _ = regexp.MatchString(`[/+]json(?:;|$)`, response.Header.Get("Content-Type"))
 		}
 		if includeHeaders {
-			fmt.Fprintf(out, "%s %s\r\n", response.Proto, response.Status)
-			response.Header.Write(out)
-			fmt.Fprintf(out, "\r\n")
+			_, _ = fmt.Fprintf(out, "%s %s\r\n", response.Proto, response.Status)
+			_ = response.Header.Write(out)
+			_, _ = fmt.Fprintf(out, "\r\n")
 		}
 
 		endCursor := ""
@@ -280,16 +280,20 @@ func apiCommand(_ *Command, args *Args) {
 			bodyCopy := &bytes.Buffer{}
 			tee := io.TeeReader(response.Body, bodyCopy)
 			txtBody, _ := ioutil.ReadAll(tee)
-			Display(txtBody, "--sav")
+			err := Display(txtBody, "--sav")
+			if err != nil {
+				fmt.Println(err)
+			}
+			return txtBody
 		} else if paginate && isGraphQL {
 			bodyCopy := &bytes.Buffer{}
-			io.Copy(out, io.TeeReader(response.Body, bodyCopy))
+			_, _ = io.Copy(out, io.TeeReader(response.Body, bodyCopy))
 			hasNextPage, endCursor = utils.JSONPath(ioutil.Discard, bodyCopy, false)
-			fmt.Fprintf(out, "\n")
+			_, _ = fmt.Fprintf(out, "\n")
 		} else {
-			io.Copy(out, response.Body)
+			_, _ = io.Copy(out, response.Body)
 		}
-		response.Body.Close()
+		_ = response.Body.Close()
 
 		if !success {
 			os.Exit(22)
@@ -321,6 +325,7 @@ func apiCommand(_ *Command, args *Args) {
 			pauseUntil(response.RateLimitReset())
 		}
 	}
+	return nil
 }
 
 func pauseUntil(timestamp int) {

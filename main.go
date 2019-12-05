@@ -3,6 +3,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 	"syscall"
@@ -14,7 +15,8 @@ import (
 
 func main() {
 	defer github.CaptureCrash()
-	err := commands.CmdRunner.Execute(os.Args)
+	err, toto := commands.CmdRunner.Execute(os.Args)
+	fmt.Println("dslkjflkj", toto)
 	exitCode := handleError(err)
 	os.Exit(exitCode)
 }

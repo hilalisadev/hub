@@ -35,7 +35,7 @@ func (r *Runner) Lookup(name string) *Command {
 	return r.commands[name]
 }
 
-func (r *Runner) Execute(cliArgs []string) error {
+func (r *Runner) Execute(cliArgs []string) (error, []byte) {
 	args := NewArgs(cliArgs[1:])
 	args.ProgramPath = cliArgs[0]
 	forceFail := false
@@ -67,11 +67,11 @@ func (r *Runner) Execute(cliArgs []string) error {
 
 	cmd := r.Lookup(cmdName)
 	if cmd != nil && cmd.Runnable() {
-		err := callRunnableCommand(cmd, args)
+		err, result := callRunnableCommand(cmd, args)
 		if err == nil && forceFail {
 			err = fmt.Errorf("")
 		}
-		return err
+		return err, result
 	}
 
 	gitArgs := []string{}
@@ -80,29 +80,29 @@ func (r *Runner) Execute(cliArgs []string) error {
 	}
 	gitArgs = append(gitArgs, args.Params...)
 
-	return git.Run(gitArgs...)
+	return git.Run(gitArgs...), nil
 }
 
-func callRunnableCommand(cmd *Command, args *Args) error {
-	err := cmd.Call(args)
+func callRunnableCommand(cmd *Command, args *Args) (error, []byte) {
+	err, result := cmd.Call(args)
 	if err != nil {
-		return err
+		return err, nil
 	}
 
 	cmds := args.Commands()
 	if args.Noop {
 		printCommands(cmds)
 	} else if err = executeCommands(cmds, len(args.Callbacks) == 0); err != nil {
-		return err
+		return err, nil
 	}
 
 	for _, fn := range args.Callbacks {
 		if err = fn(); err != nil {
-			return err
+			return err, nil
 		}
 	}
 
-	return nil
+	return nil, result
 }
 
 func printCommands(cmds []*cmd.Cmd) {

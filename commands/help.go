@@ -48,13 +48,13 @@ func init() {
 	CmdRunner.Use(cmdListCmds)
 }
 
-func runHelp(helpCmd *Command, args *Args) {
+func runHelp(helpCmd *Command, args *Args) []byte {
 	if args.IsParamsEmpty() {
 		args.AfterFn(func() error {
 			ui.Println(helpText)
 			return nil
 		})
-		return
+		return nil
 	}
 
 	p := utils.NewArgsParser()
@@ -69,7 +69,7 @@ func runHelp(helpCmd *Command, args *Args) {
 			ui.Printf("\nhub custom commands\n\n  %s\n", strings.Join(customCommands(), "  "))
 			return nil
 		})
-		return
+		return nil
 	}
 
 	isWeb := func() bool {
@@ -93,12 +93,12 @@ func runHelp(helpCmd *Command, args *Args) {
 	if cmdName == "hub" {
 		err := displayManPage("hub", args, isWeb())
 		utils.Check(err)
-		return
+		return nil
 	}
 
 	foundCmd := lookupCmd(cmdName)
 	if foundCmd == nil {
-		return
+		return nil
 	}
 
 	if p.Bool("--plain-text") {
@@ -109,9 +109,10 @@ func runHelp(helpCmd *Command, args *Args) {
 	manPage := fmt.Sprintf("hub-%s", foundCmd.Name())
 	err := displayManPage(manPage, args, isWeb())
 	utils.Check(err)
+	return nil
 }
 
-func runListCmds(cmd *Command, args *Args) {
+func runListCmds(cmd *Command, args *Args) []byte {
 	listOthers := false
 	parts := strings.SplitN(args.Command, "=", 2)
 	for _, kind := range strings.Split(parts[1], ",") {
@@ -127,6 +128,7 @@ func runListCmds(cmd *Command, args *Args) {
 			return nil
 		})
 	}
+	return nil
 }
 
 // On systems where `man` was found, invoke:

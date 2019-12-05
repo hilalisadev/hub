@@ -20,10 +20,11 @@ func init() {
 	CmdRunner.Use(cmdSubmodule)
 }
 
-func submodule(command *Command, args *Args) {
+func submodule(command *Command, args *Args) []byte {
 	if !args.IsParamsEmpty() {
 		transformSubmoduleArgs(args)
 	}
+	return nil
 }
 
 func transformSubmoduleArgs(args *Args) {

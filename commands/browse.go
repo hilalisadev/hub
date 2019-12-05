@@ -50,7 +50,7 @@ func init() {
 	CmdRunner.Use(cmdBrowse)
 }
 
-func browse(command *Command, args *Args) {
+func browse(command *Command, args *Args) []byte {
 	var (
 		dest    string
 		subpage string
@@ -124,6 +124,7 @@ func browse(command *Command, args *Args) {
 	flagBrowseURLPrint := args.Flag.Bool("--url")
 	flagBrowseURLCopy := args.Flag.Bool("--copy")
 	printBrowseOrCopy(args, pageUrl, !flagBrowseURLPrint && !flagBrowseURLCopy, flagBrowseURLCopy)
+	return nil
 }
 
 func branchInURL(branch *github.Branch) string {

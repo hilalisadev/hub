@@ -17,7 +17,7 @@ var (
 )
 
 type Command struct {
-	Run func(cmd *Command, args *Args)
+	Run func(cmd *Command, args *Args) []byte
 
 	Key          string
 	Usage        string
@@ -29,22 +29,22 @@ type Command struct {
 	parentCommand *Command
 }
 
-func (c *Command) Call(args *Args) (err error) {
+func (c *Command) Call(args *Args) (err error, bytes []byte) {
 	runCommand, err := c.lookupSubCommand(args)
 	if err != nil {
-		return
+		return err, nil
 	}
 
 	if !c.GitExtension {
 		err = runCommand.parseArguments(args)
 		if err != nil {
-			return
+			return err, nil
 		}
 	}
 
-	runCommand.Run(runCommand, args)
+	result := runCommand.Run(runCommand, args)
 
-	return
+	return err, result
 }
 
 type ErrHelp struct {

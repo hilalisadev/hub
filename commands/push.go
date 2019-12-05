@@ -32,10 +32,11 @@ func init() {
 	CmdRunner.Use(cmdPush)
 }
 
-func push(command *Command, args *Args) {
+func push(command *Command, args *Args) []byte {
 	if !args.IsParamsEmpty() && strings.Contains(args.FirstParam(), ",") {
 		transformPushArgs(args)
 	}
+	return nil
 }
 
 func transformPushArgs(args *Args) {

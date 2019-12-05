@@ -64,7 +64,7 @@ func init() {
 	CmdRunner.Use(cmdCompare)
 }
 
-func compare(command *Command, args *Args) {
+func compare(command *Command, args *Args) []byte {
 	localRepo, err := github.LocalRepo()
 	utils.Check(err)
 
@@ -127,6 +127,7 @@ func compare(command *Command, args *Args) {
 	flagCompareURLOnly := args.Flag.Bool("--url")
 	flagCompareCopy := args.Flag.Bool("--copy")
 	printBrowseOrCopy(args, url, !flagCompareURLOnly && !flagCompareCopy, flagCompareCopy)
+	return nil
 }
 
 func parseCompareRange(r string) string {

@@ -78,7 +78,7 @@ func checkSeverity(targetState string) int {
 	return -1
 }
 
-func ciStatus(cmd *Command, args *Args) {
+func ciStatus(cmd *Command, args *Args) []byte {
 	ref := "HEAD"
 	if !args.IsParamsEmpty() {
 		ref = args.RemoveParam(0)
@@ -138,6 +138,7 @@ func ciStatus(cmd *Command, args *Args) {
 
 		os.Exit(exitCode)
 	}
+	return nil
 }
 
 func ciVerboseFormat(statuses []github.CIStatus, formatString string, colorize bool) {

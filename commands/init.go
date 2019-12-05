@@ -38,9 +38,10 @@ func init() {
 	CmdRunner.Use(cmdInit)
 }
 
-func gitInit(command *Command, args *Args) {
+func gitInit(command *Command, args *Args) []byte {
 	err := transformInitArgs(args)
 	utils.Check(err)
+	return nil
 }
 
 func transformInitArgs(args *Args) error {

@@ -38,7 +38,7 @@ func init() {
 	CmdRunner.Use(cmdSync)
 }
 
-func sync(cmd *Command, args *Args) {
+func sync(cmd *Command, args *Args) []byte {
 	localRepo, err := github.LocalRepo()
 	utils.Check(err)
 
@@ -134,4 +134,5 @@ func sync(cmd *Command, args *Args) {
 	}
 
 	args.NoForward()
+	return nil
 }

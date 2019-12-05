@@ -42,7 +42,7 @@ func init() {
 	CmdRunner.Use(cmdFork)
 }
 
-func fork(cmd *Command, args *Args) {
+func fork(cmd *Command, args *Args) []byte {
 	localRepo, err := github.LocalRepo()
 	utils.Check(err)
 
@@ -111,7 +111,7 @@ func fork(cmd *Command, args *Args) {
 			if err == nil {
 				if currentProject.SameAs(forkProject) {
 					ui.Printf("existing remote: %s\n", newRemoteName)
-					return
+					return nil
 				}
 				if newRemoteName == "origin" {
 					// Assume user wants to follow github guides for collaboration
@@ -129,4 +129,5 @@ func fork(cmd *Command, args *Args) {
 			return nil
 		})
 	}
+	return nil
 }

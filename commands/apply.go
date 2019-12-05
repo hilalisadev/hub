@@ -60,10 +60,11 @@ func init() {
 	CmdRunner.Use(cmdAm)
 }
 
-func apply(command *Command, args *Args) {
+func apply(command *Command, args *Args) []byte {
 	if !args.IsParamsEmpty() {
 		transformApplyArgs(args)
 	}
+	return nil
 }
 
 func transformApplyArgs(args *Args) {

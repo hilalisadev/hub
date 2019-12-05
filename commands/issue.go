@@ -227,7 +227,7 @@ func init() {
 	CmdRunner.Use(cmdIssue)
 }
 
-func listIssues(cmd *Command, args *Args) {
+func listIssues(cmd *Command, args *Args) []byte {
 	localRepo, err := github.LocalRepo()
 	utils.Check(err)
 
@@ -313,6 +313,7 @@ func listIssues(cmd *Command, args *Args) {
 	}
 
 	args.NoForward()
+	return nil
 }
 
 func formatIssuePlaceholders(issue github.Issue, colorize bool) map[string]string {
@@ -465,7 +466,7 @@ func formatIssue(issue github.Issue, format string, colorize bool) string {
 	return ui.Expand(format, placeholders, colorize)
 }
 
-func showIssue(cmd *Command, args *Args) {
+func showIssue(cmd *Command, args *Args) []byte {
 	issueNumber := ""
 	if args.ParamsSize() > 0 {
 		issueNumber = args.GetParam(0)
@@ -492,7 +493,7 @@ func showIssue(cmd *Command, args *Args) {
 	if args.Flag.HasReceived("--format") {
 		flagShowIssueFormat := args.Flag.Value("--format")
 		ui.Print(formatIssue(*issue, flagShowIssueFormat, colorize))
-		return
+		return nil
 	}
 
 	var closed = ""
@@ -521,9 +522,10 @@ func showIssue(cmd *Command, args *Args) {
 			ui.Printf("\n### comment by @%s on %s\n\n%s\n", comment.User.Login, comment.CreatedAt.String(), comment.Body)
 		}
 	}
+	return nil
 }
 
-func createIssue(cmd *Command, args *Args) {
+func createIssue(cmd *Command, args *Args) []byte {
 	localRepo, err := github.LocalRepo()
 	utils.Check(err)
 
@@ -606,9 +608,10 @@ text is the title and the rest is the description.`, project))
 	}
 
 	messageBuilder.Cleanup()
+	return nil
 }
 
-func listLabels(cmd *Command, args *Args) {
+func listLabels(cmd *Command, args *Args) []byte {
 	localRepo, err := github.LocalRepo()
 	utils.Check(err)
 
@@ -620,7 +623,7 @@ func listLabels(cmd *Command, args *Args) {
 	args.NoForward()
 	if args.Noop {
 		ui.Printf("Would request list of labels for %s\n", project)
-		return
+		return nil
 	}
 
 	labels, err := gh.FetchLabels(project)
@@ -630,6 +633,7 @@ func listLabels(cmd *Command, args *Args) {
 	for _, label := range labels {
 		ui.Print(formatLabel(label, flagLabelsColorize))
 	}
+	return nil
 }
 
 func colorizeOutput(colorSet bool, when string) bool {

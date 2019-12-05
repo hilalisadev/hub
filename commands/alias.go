@@ -33,7 +33,7 @@ func init() {
 	CmdRunner.Use(cmdAlias)
 }
 
-func alias(command *Command, args *Args) {
+func alias(command *Command, args *Args) []byte {
 	var shell string
 	if args.ParamsSize() > 0 {
 		shell = args.FirstParam()
@@ -124,4 +124,5 @@ end`
 	}
 
 	args.NoForward()
+	return nil
 }

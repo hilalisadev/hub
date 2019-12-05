@@ -34,11 +34,12 @@ func init() {
 	CmdRunner.Use(cmdMerge)
 }
 
-func merge(command *Command, args *Args) {
+func merge(command *Command, args *Args) []byte {
 	if !args.IsParamsEmpty() {
 		err := transformMergeArgs(args)
 		utils.Check(err)
 	}
+	return nil
 }
 
 func transformMergeArgs(args *Args) error {

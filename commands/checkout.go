@@ -30,11 +30,11 @@ func init() {
 	CmdRunner.Use(cmdCheckout)
 }
 
-func checkout(command *Command, args *Args) {
+func checkout(command *Command, args *Args) []byte {
 	words := args.Words()
 
 	if len(words) == 0 {
-		return
+		return nil
 	}
 
 	checkoutURL := words[0]
@@ -46,14 +46,14 @@ func checkout(command *Command, args *Args) {
 	url, err := github.ParseURL(checkoutURL)
 	if err != nil {
 		// not a valid GitHub URL
-		return
+		return nil
 	}
 
 	pullURLRegex := regexp.MustCompile("^pull/(\\d+)")
 	projectPath := url.ProjectPath()
 	if !pullURLRegex.MatchString(projectPath) {
 		// not a valid PR URL
-		return
+		return nil
 	}
 
 	err = sanitizeCheckoutFlags(args)
@@ -71,6 +71,7 @@ func checkout(command *Command, args *Args) {
 		args.RemoveParam(idx)
 	}
 	replaceCheckoutParam(args, checkoutURL, newArgs...)
+	return nil
 }
 
 func transformCheckoutArgs(args *Args, pullRequest *github.PullRequest, newBranchName string) (newArgs []string, err error) {

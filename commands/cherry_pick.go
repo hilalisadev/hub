@@ -27,10 +27,11 @@ func init() {
 	CmdRunner.Use(cmdCherryPick)
 }
 
-func cherryPick(command *Command, args *Args) {
+func cherryPick(command *Command, args *Args) []byte {
 	if args.IndexOfParam("-m") == -1 && args.IndexOfParam("--mainline") == -1 {
 		transformCherryPickArgs(args)
 	}
+	return nil
 }
 
 func transformCherryPickArgs(args *Args) {

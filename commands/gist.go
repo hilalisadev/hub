@@ -107,11 +107,12 @@ func getGist(gh *github.Client, id string, filename string) error {
 	return nil
 }
 
-func printGistHelp(command *Command, args *Args) {
+func printGistHelp(command *Command, args *Args) []byte {
 	utils.Check(command.UsageError(""))
+	return nil
 }
 
-func createGist(cmd *Command, args *Args) {
+func createGist(cmd *Command, args *Args) []byte {
 	args.NoForward()
 
 	host, err := github.CurrentConfig().DefaultHostNoPrompt()
@@ -139,9 +140,10 @@ func createGist(cmd *Command, args *Args) {
 	flagIssueBrowse := args.Flag.Bool("--browse")
 	flagIssueCopy := args.Flag.Bool("--copy")
 	printBrowseOrCopy(args, gist.HtmlUrl, flagIssueBrowse, flagIssueCopy)
+	return nil
 }
 
-func showGist(cmd *Command, args *Args) {
+func showGist(cmd *Command, args *Args) []byte {
 	args.NoForward()
 
 	if args.ParamsSize() < 1 {
@@ -160,4 +162,5 @@ func showGist(cmd *Command, args *Args) {
 
 	err = getGist(gh, id, filename)
 	utils.Check(err)
+	return nil
 }

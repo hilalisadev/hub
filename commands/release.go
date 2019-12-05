@@ -232,7 +232,7 @@ func init() {
 	CmdRunner.Use(cmdRelease)
 }
 
-func listReleases(cmd *Command, args *Args) {
+func listReleases(cmd *Command, args *Args) []byte {
 	localRepo, err := github.LocalRepo()
 	utils.Check(err)
 
@@ -265,6 +265,7 @@ func listReleases(cmd *Command, args *Args) {
 	}
 
 	args.NoForward()
+	return nil
 }
 
 func formatRelease(release github.Release, format string, colorize bool) string {
@@ -322,7 +323,7 @@ func formatRelease(release github.Release, format string, colorize bool) string 
 	return ui.Expand(format, placeholders, colorize)
 }
 
-func showRelease(cmd *Command, args *Args) {
+func showRelease(cmd *Command, args *Args) []byte {
 	tagName := ""
 	if args.ParamsSize() > 0 {
 		tagName = args.GetParam(0)
@@ -352,7 +353,7 @@ func showRelease(cmd *Command, args *Args) {
 		colorize := colorizeOutput(args.Flag.HasReceived("--color"), args.Flag.Value("--color"))
 		if flagShowReleaseFormat := args.Flag.Value("--format"); flagShowReleaseFormat != "" {
 			ui.Print(formatRelease(*release, flagShowReleaseFormat, colorize))
-			return
+			return nil
 		}
 
 		ui.Println(release.Name)
@@ -370,9 +371,10 @@ func showRelease(cmd *Command, args *Args) {
 			}
 		}
 	}
+	return nil
 }
 
-func downloadRelease(cmd *Command, args *Args) {
+func downloadRelease(cmd *Command, args *Args) []byte {
 	tagName := ""
 	if args.ParamsSize() > 0 {
 		tagName = args.GetParam(0)
@@ -418,6 +420,7 @@ func downloadRelease(cmd *Command, args *Args) {
 	}
 
 	args.NoForward()
+	return nil
 }
 
 func downloadReleaseAsset(asset github.ReleaseAsset, gh *github.Client) (err error) {
@@ -440,14 +443,14 @@ func downloadReleaseAsset(asset github.ReleaseAsset, gh *github.Client) (err err
 	return
 }
 
-func createRelease(cmd *Command, args *Args) {
+func createRelease(cmd *Command, args *Args) []byte {
 	tagName := ""
 	if args.ParamsSize() > 0 {
 		tagName = args.GetParam(0)
 	}
 	if tagName == "" {
 		utils.Check(cmd.UsageError(""))
-		return
+		return nil
 	}
 
 	assetsToUpload, close, err := openAssetFiles(args.Flag.AllValues("--attach"))
@@ -518,7 +521,7 @@ text is the title and the rest is the description.`, tagName, project))
 
 	numAssets := len(assetsToUpload)
 	if numAssets == 0 {
-		return
+		return nil
 	}
 	if args.Noop {
 		ui.Printf("Would attach %d %s\n", numAssets, pluralize(numAssets, "asset"))
@@ -535,16 +538,17 @@ text is the title and the rest is the description.`, tagName, project))
 			utils.Check(err)
 		}
 	}
+	return nil
 }
 
-func editRelease(cmd *Command, args *Args) {
+func editRelease(cmd *Command, args *Args) []byte {
 	tagName := ""
 	if args.ParamsSize() > 0 {
 		tagName = args.GetParam(0)
 	}
 	if tagName == "" {
 		utils.Check(cmd.UsageError(""))
-		return
+		return nil
 	}
 
 	assetsToUpload, close, err := openAssetFiles(args.Flag.AllValues("--attach"))
@@ -624,7 +628,7 @@ text is the title and the rest is the description.`, tagName, project))
 
 	numAssets := len(assetsToUpload)
 	if numAssets == 0 {
-		return
+		return nil
 	}
 	if args.Noop {
 		ui.Printf("Would attach %d %s\n", numAssets, pluralize(numAssets, "asset"))
@@ -640,16 +644,17 @@ text is the title and the rest is the description.`, tagName, project))
 			utils.Check(err)
 		}
 	}
+	return nil
 }
 
-func deleteRelease(cmd *Command, args *Args) {
+func deleteRelease(cmd *Command, args *Args) []byte {
 	tagName := ""
 	if args.ParamsSize() > 0 {
 		tagName = args.GetParam(0)
 	}
 	if tagName == "" {
 		utils.Check(cmd.UsageError(""))
-		return
+		return nil
 	}
 
 	localRepo, err := github.LocalRepo()
@@ -672,6 +677,7 @@ func deleteRelease(cmd *Command, args *Args) {
 	}
 
 	args.NoForward()
+	return nil
 }
 
 func openAssetFiles(args []string) ([]github.LocalAsset, func(), error) {

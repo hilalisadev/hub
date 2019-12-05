@@ -42,7 +42,7 @@ func init() {
 	CmdRunner.Use(cmdDelete)
 }
 
-func deleteRepo(command *Command, args *Args) {
+func deleteRepo(command *Command, args *Args) []byte {
 	var repoName string
 	if !args.IsParamsEmpty() {
 		repoName = args.FirstParam()
@@ -94,4 +94,5 @@ func deleteRepo(command *Command, args *Args) {
 	}
 
 	args.NoForward()
+	return nil
 }

@@ -32,11 +32,12 @@ func init() {
 	CmdRunner.Use(cmdFetch)
 }
 
-func fetch(command *Command, args *Args) {
+func fetch(command *Command, args *Args) []byte {
 	if !args.IsParamsEmpty() {
 		err := transformFetchArgs(args)
 		utils.Check(err)
 	}
+	return nil
 }
 
 func transformFetchArgs(args *Args) error {

@@ -48,10 +48,11 @@ func init() {
 
 /*
  */
-func remote(command *Command, args *Args) {
+func remote(command *Command, args *Args) []byte {
 	if !args.IsParamsEmpty() && (args.FirstParam() == "add" || args.FirstParam() == "set-url") {
 		transformRemoteArgs(args)
 	}
+	return nil
 }
 
 func transformRemoteArgs(args *Args) {

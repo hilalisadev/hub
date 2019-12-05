@@ -182,11 +182,12 @@ func init() {
 	CmdRunner.Use(cmdPr)
 }
 
-func printHelp(command *Command, args *Args) {
+func printHelp(command *Command, args *Args) []byte {
 	utils.Check(command.UsageError(""))
+	return nil
 }
 
-func listPulls(cmd *Command, args *Args) {
+func listPulls(cmd *Command, args *Args) []byte {
 	localRepo, err := github.LocalRepo()
 	utils.Check(err)
 
@@ -198,7 +199,7 @@ func listPulls(cmd *Command, args *Args) {
 	args.NoForward()
 	if args.Noop {
 		ui.Printf("Would request list of pull requests for %s\n", project)
-		return
+		return nil
 	}
 
 	filters := map[string]interface{}{}
@@ -246,9 +247,10 @@ func listPulls(cmd *Command, args *Args) {
 	for _, pr := range pulls {
 		ui.Print(formatPullRequest(pr, flagPullRequestFormat, colorize))
 	}
+	return nil
 }
 
-func checkoutPr(command *Command, args *Args) {
+func checkoutPr(command *Command, args *Args) []byte {
 	words := args.Words()
 	var newBranchName string
 
@@ -277,9 +279,10 @@ func checkoutPr(command *Command, args *Args) {
 	utils.Check(err)
 
 	args.Replace(args.Executable, "checkout", newArgs...)
+	return nil
 }
 
-func showPr(command *Command, args *Args) {
+func showPr(command *Command, args *Args) []byte {
 	localRepo, err := github.LocalRepo()
 	utils.Check(err)
 
@@ -315,13 +318,14 @@ func showPr(command *Command, args *Args) {
 		}
 		colorize := colorizeOutput(args.Flag.HasReceived("--color"), args.Flag.Value("--color"))
 		ui.Println(formatPullRequest(*pr, format, colorize))
-		return
+		return nil
 	}
 
 	printUrl := args.Flag.Bool("--url")
 	copyUrl := args.Flag.Bool("--copy")
 
 	printBrowseOrCopy(args, openUrl, !printUrl && !copyUrl, copyUrl)
+	return nil
 }
 
 func findCurrentPullRequest(localRepo *github.GitHubRepo, gh *github.Client, baseProject *github.Project, headArg string) (*github.PullRequest, error) {

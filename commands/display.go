@@ -54,9 +54,7 @@ func Display(data []byte, option ...string) error {
 			if len(isFlag) == len(option) {
 				y := flag.Lookup(option[k])
 				if y != nil {
-					fmt.Fprintf(out, "%s %s\r\n", y.Usage, y.Name)
-
-					//fmt.Println(y.Usage, y.Name)
+					_, _ = fmt.Fprintf(out, "%s %s\r\n", y.Usage, y.Name)
 					for k := range reading.Data.Repository.Object.Entries {
 						display(reading.Data.Repository.Object.Entries[k], isFlag)
 					}
@@ -90,8 +88,8 @@ func help() (int, error) {
 --sav 	"... Sauvegarde des informations dans base"
 --help	"... Affiche l'aide"`)
 	/*	return fmt.Println(`Usage of Display:
-	--sav 	"... Sauvegarde des informations dans base"
-	--help	"... Affiche l'aide"`)*/
+		--sav 	"... Sauvegarde des informations dans base"
+		--help	"... Affiche l'aide"`)*/
 }
 
 // display will display the details of the provided value.

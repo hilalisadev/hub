@@ -46,10 +46,11 @@ func init() {
 	CmdRunner.Use(cmdClone)
 }
 
-func clone(command *Command, args *Args) {
+func clone(command *Command, args *Args) []byte {
 	if !args.IsParamsEmpty() {
 		transformCloneArgs(args)
 	}
+	return nil
 }
 
 func transformCloneArgs(args *Args) {
