@@ -280,10 +280,6 @@ func apiCommand(_ *Command, args *Args) []byte {
 			bodyCopy := &bytes.Buffer{}
 			tee := io.TeeReader(response.Body, bodyCopy)
 			txtBody, _ := ioutil.ReadAll(tee)
-			/*			err := Display(txtBody, "--sav")
-						if err != nil {
-							fmt.Println(err)
-						}*/
 			return txtBody
 		} else if paginate && isGraphQL {
 			bodyCopy := &bytes.Buffer{}
