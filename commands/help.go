@@ -229,4 +229,8 @@ These GitHub commands are provided by hub:
    pull-request   Open a pull request on GitHub
    release        List or create GitHub releases
    sync           Fetch git objects from upstream and update branches
+
+The Github command are provided by hubex:
+
+   search         Low-level remote repository
 `
