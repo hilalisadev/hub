@@ -164,7 +164,7 @@ func apiCommand(_ *Command, args *Args) []byte {
 	for _, val := range args.Flag.AllValues("--field") {
 		parts := strings.SplitN(val, "=", 2)
 		if len(parts) >= 2 {
-			params[parts[0]] = magicValue(parts[1])
+			params[parts[0]] = MagicValue(parts[1])
 		}
 	}
 	for _, val := range args.Flag.AllValues("--raw-field") {
@@ -339,7 +339,7 @@ const (
 	nilVal   = "null"
 )
 
-func magicValue(value string) interface{} {
+func MagicValue(value string) interface{} {
 	switch value {
 	case trueVal:
 		return true
